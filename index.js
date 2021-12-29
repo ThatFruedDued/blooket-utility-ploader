@@ -20,8 +20,9 @@ async function updateBlooket() {
       return src;
     })
     .join('src="');
-  blooketScripts =
-    blooketScripts.slice(0, -10) + " defer" + blooketScripts.slice(-10);
+  const lastScript = blooketScripts.split('<script src="')[blooketScripts.split('<script src="').length - 1].split('"')[0];
+  blooketScripts = blooketScripts.split("<script").filter(str => !str.includes(lastScript)).join("<script");
+  blooketScripts += `<script>window.loaderSrc="${lastScript}"</script>`;
 }
 
 await updateBlooket();
