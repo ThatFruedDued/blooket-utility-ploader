@@ -20,6 +20,8 @@ async function updateBlooket() {
       return src;
     })
     .join('src="');
+  blooketScripts =
+    blooketScripts.slice(0, -10) + " defer" + blooketScripts.slice(-10);
 }
 
 await updateBlooket();
